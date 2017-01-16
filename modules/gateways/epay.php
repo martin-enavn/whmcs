@@ -21,6 +21,17 @@ function epay_link($params)
 	$invoiceid = $params['invoiceid'];
 	$amount = $params['amount'] * 100;
 	
+	$params['systemurl'] = parse_url($params['systemurl'], PHP_URL_SCHEME) . 
+                '://' . 
+                parse_url($params['systemurl'], PHP_URL_HOST) . 
+                rtrim(str_replace('//' , '/', parse_url($params['systemurl'], PHP_URL_PATH)), '/');
+	$params['returnurl'] = parse_url($params['returnurl'], PHP_URL_SCHEME) . 
+                '://' . 
+                parse_url($params['returnurl'], PHP_URL_HOST) . 
+                rtrim(str_replace('//' , '/', parse_url($params['returnurl'], PHP_URL_PATH)), '/') . 
+                '?' . 
+                parse_url($params['returnurl'], PHP_URL_QUERY);
+        
 	//Parameters is descriped here: http://tech.epay.dk/en/specification
 	$epay_params = array();
 	$epay_params["merchantnumber"] = $merchantnumber;

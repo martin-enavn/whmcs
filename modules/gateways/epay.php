@@ -38,7 +38,7 @@ function epay_link($params)
 	$epay_params["smsreceipt"] = $params["authsms"];
 	$epay_params["mailreceipt"] = $params["authmail"];
 	$epay_params["group"] = $params["group"];
-	$epay_params["hash"] = md5(implode("", array_values($params)) . $params['md5key']);
+	$epay_params["hash"] = md5(implode("", array_values($epay_params)) . $params['md5key']);
 	
 	$code = '
 	<form action="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/Default.aspx" method="post">';
